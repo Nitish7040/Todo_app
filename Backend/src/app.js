@@ -1,3 +1,4 @@
+// app.js 
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
@@ -14,7 +15,7 @@ dotenv.config({
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN || "http://localhost:4000", // Use the environment variable or fallback to localhost:3000
     credentials: true
 }));
 //configuration of cors library for ors origin error.
@@ -52,3 +53,4 @@ app.post('/register', upload.fields([{ name: 'avatar', maxCount: 1 }]), register
 
 
 export{ app };
+             
