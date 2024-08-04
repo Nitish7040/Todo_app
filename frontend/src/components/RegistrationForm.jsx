@@ -1,42 +1,34 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../components/index.css';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
     username: '',
     password: '',
-    avatar: null
+    email: '',
+    fullName: '',
+    avatar: null,
   });
-
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    if (e.target.name === 'avatar') {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.files[0]
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      });
-    }
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     const data = new FormData();
-    data.append('fullName', formData.fullName);
-    data.append('email', formData.email);
-    data.append('username', formData.username);
-    data.append('password', formData.password);
-    if (formData.avatar) {
-      data.append('avatar', formData.avatar);
+    for (const key in formData) {
+      data.append(key, formData[key]);
     }
 
     try {
@@ -47,6 +39,7 @@ const RegistrationForm = () => {
       });
       setMessage('Registration successful!');
       setIsError(false);
+      navigate('/dashboard');
     } catch (error) {
       setMessage('Error registering user. Please try again.');
       setIsError(true);
@@ -55,6 +48,12 @@ const RegistrationForm = () => {
 
   return (
     <div className="registration-form-container">
+      {message && (
+        <div className={`message ${isError ? 'error' : 'success'}`}>
+          {message}
+        </div>
+      )}
+
       <form className="registration-form" onSubmit={handleSubmit}>
         <h2>Register</h2>
         <div className="form-group">
@@ -113,11 +112,6 @@ const RegistrationForm = () => {
         </div>
         <button type="submit">Register</button>
       </form>
-      {message && (
-        <div className={`message ${isError ? 'error' : 'success'}`}>
-          {message}
-        </div>
-      )}
     </div>
   );
 };
