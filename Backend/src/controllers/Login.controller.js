@@ -4,6 +4,7 @@ import {User} from "../models/user.model.js";
 import { ApiResponce} from "../Utils/ApiResponse.utils.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import { logoutUser } from "./Logout.controller.js";
 
 // Generate accessAndRefreshToken
 const generateAccessAndRefreshToken = async (userId)=>{
