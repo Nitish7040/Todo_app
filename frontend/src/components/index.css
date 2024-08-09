@@ -151,6 +151,47 @@ button:hover {
 .content {
   margin-top: 2rem;
 }
+/*       css for avatar component    */
+
+/* Avatar.css */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px;
+  text-align: center;
+}
+
+.avatar-img {
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  object-fit: cover;
+}
+
+.avatar-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.avatar.small .avatar-img {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar.medium .avatar-img {
+  width: 80px;
+  height: 80px;
+}
+
+.avatar.large .avatar-img {
+  width: 120px;
+  height: 120px;
+}
+
+
+
 
 
 /*  Home page CSS  */

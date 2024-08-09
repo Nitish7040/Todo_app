@@ -17,16 +17,24 @@ const todoSchema = new mongoose.Schema(
         type:Boolean,
         default:false,
       },
-      subtodo :[
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "subtodo"
-        } //------------ Array of subtodo
-      ]
+      deadline: {
+        type: Date,
+        required: true,
+      },
+
+
+
+      // subtodo :[
+      //   {
+      //       type : mongoose.Schema.Types.ObjectId,
+      //       ref : "subtodo"
+      //   } //------------ Array of subtodo
+      // ]
     },
     {
         timestamps:true
     }
 )
+
 
 export const Todo = mongoose.model("Todo",todoSchema);

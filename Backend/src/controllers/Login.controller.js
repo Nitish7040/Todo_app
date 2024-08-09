@@ -35,7 +35,6 @@ const loginUser = asyncHandler (async (req , res) => {
         // {!email for mail and !username for username}
         throw new ApiError(400, "username and email is required")
        }
-    
     // User.findOne({username}) 
     const user = await User.findOne({
       $or : [{username} , {email}]
@@ -84,4 +83,20 @@ const loginUser = asyncHandler (async (req , res) => {
     });
 
 
-    export {loginUser};
+    // Controller to fetch user data
+export const getUserProfile = async (req, res) => {
+  try {
+    const userId = req.user._id; // Assuming you have userId from JWT or session
+    const user = await User.findById(userId).select('name avatar');
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+    export {loginUser };
