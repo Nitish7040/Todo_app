@@ -14,6 +14,7 @@ const registerUser = asyncHandler(async(req,res) => {
       
      throw new ApiError(400, "all filed are required")
    }
+   console.log(process.env.CLOUDINARY_CLOUD_NAME, process.env.CLOUDINARY_API_KEY, process.env.CLOUDINARY_API_SECRET);
 
 const existedUser = await User.findOne({
     $or :[{username}, {email}],
@@ -24,7 +25,7 @@ const existedUser = await User.findOne({
    }
 
    const avatarLocalPath = req.files?.avatar?.[0]?.path;
-    // console.log("req.files:", req.files);
+    console.log("req.files:", req.files);
  
     if (!avatarLocalPath) {
         throw new ApiError (400,"avatar file is required")
@@ -33,6 +34,7 @@ const existedUser = await User.findOne({
     
       const avatar =  await uploadOnCloudinary(avatarLocalPath) ;
 
+      console.log("Avatar local path:", avatarLocalPath);
 
 
       if (!avatar) {

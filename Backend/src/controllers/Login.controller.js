@@ -100,3 +100,4 @@ export const getUserProfile = async (req, res) => {
 };
 
     export {loginUser };
+    
