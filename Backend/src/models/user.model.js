@@ -22,10 +22,10 @@ const userSchema = new mongoose.Schema(
                 unique:true,
                 lowercase:true
             },
-            avatar:{
-                type:String,  //cloudinary url
-                required : true,
-            },
+            // avatar:{
+            //     type:String,  //cloudinary url
+            //     required : true,
+            // },
             password:{
                 type: String,
                 required : [true, 'password is required'],

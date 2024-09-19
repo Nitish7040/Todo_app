@@ -1,9 +1,9 @@
 // src/components/LoginForm.jsx
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import '../components/index.css';
+import '../index.css'; 
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -26,7 +26,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form-container">
+    <div className="login-form-container ">
+                  <Link to="/login" className="nav-link">Login</Link>
+                  <Link to="/register" className="nav-link">Register</Link>
         {message && <p className="message">{message}</p>}
       <form onSubmit={handleLogin}>
         <h2>Login</h2>

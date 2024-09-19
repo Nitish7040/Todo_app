@@ -2,7 +2,7 @@ import { asyncHandler } from "../Utils/AsyncHandler.utils.js";
 import {ApiError} from "../Utils/apierror.utils.js";
 import {User} from "../models/user.model.js";
 import { ApiResponce} from "../Utils/ApiResponse.utils.js";
-import {uploadOnCloudinary} from "../Utils/cloudinary.utils.js";
+// import {uploadOnCloudinary} from "../utils/cloudinary.utils.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
@@ -14,7 +14,7 @@ const registerUser = asyncHandler(async(req,res) => {
       
      throw new ApiError(400, "all filed are required")
    }
-   console.log(process.env.CLOUDINARY_CLOUD_NAME, process.env.CLOUDINARY_API_KEY, process.env.CLOUDINARY_API_SECRET);
+  //  console.log(process.env.CLOUDINARY_CLOUD_NAME, process.env.CLOUDINARY_API_KEY, process.env.CLOUDINARY_API_SECRET);
 
 const existedUser = await User.findOne({
     $or :[{username}, {email}],
@@ -24,27 +24,27 @@ const existedUser = await User.findOne({
         throw new ApiError(400, "user with email or username already exits")
    }
 
-   const avatarLocalPath = req.files?.avatar?.[0]?.path;
-    console.log("req.files:", req.files);
+  //  const avatarLocalPath = req.files?.avatar?.[0]?.path;
+    // console.log("req.files:", req.files);
  
-    if (!avatarLocalPath) {
-        throw new ApiError (400,"avatar file is required")
-      }
+    // if (!avatarLocalPath) {
+    //     throw new ApiError (400,"avatar file is required")
+    //   }
     
     
-      const avatar =  await uploadOnCloudinary(avatarLocalPath) ;
+      // const avatar =  await uploadOnCloudinary(avatarLocalPath) ;
 
-      console.log("Avatar local path:", avatarLocalPath);
+      // console.log("Avatar local path:", avatarLocalPath);
 
 
-      if (!avatar) {
-        throw new ApiError (400,"avatar file is not upload on cloudinary")
-      }
+      // if (!avatar) {
+      //   throw new ApiError (400,"avatar file is not upload on cloudinary")
+      // }
     
 
       const user = await User.create({
         fullName,
-        avatar : avatar.url,
+        // avatar : avatar.url,
         email ,
         password,
         username : username.toLowerCase()

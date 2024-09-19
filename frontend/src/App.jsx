@@ -1,22 +1,27 @@
-// src/App.jsx
-
-import React from 'react';
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import LoginForm from "./components/LoginForm.jsx";
-import RegistrationForm from "./components/RegistrationForm.jsx";
-import Dashboard from "./components/Dashboard.jsx";
-import Home from "./components/Home.jsx";
+import './App.css'
+import Addtodo from './components/Addtodo'
+import Todo from './components/Todo'
+import LoginForm from './components/Login'
+import RegistrationForm from './components/Registration'
+import Home from './components/Home'
 
+function App() {
+ // const [count, setCount] = useState(0)
 
-const App = () => {
   return (
     <Routes>
+      <Route path="/dashboard" element={<>
+        <h1>Todo</h1>
+        <Addtodo />
+        <Todo />
+      </>} />
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegistrationForm />} />
-      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 };
 
-export default App;
+export default App

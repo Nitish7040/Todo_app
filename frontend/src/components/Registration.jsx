@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../components/index.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
+import '../index.css'; 
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +48,8 @@ const RegistrationForm = () => {
 
   return (
     <div className="registration-form-container">
+                  <Link to="/login" className="nav-link">Login</Link>
+                  <Link to="/register" className="nav-link">Register</Link>
       {message && (
         <div className={`message ${isError ? 'error' : 'success'}`}>
           {message}
